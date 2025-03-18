@@ -1,9 +1,10 @@
 FROM golang:1.22-alpine AS builder
 
-LABEL org.opencontainers.image.title="sherlock" \
-      org.opencontainers.image.description="Prometheus exporter for Redfish-enabled BMCs" \
-      org.opencontainers.image.source="https://github.com/mllnd/sherlock" \
-      org.opencontainers.image.authors="mllnd"
+LABEL org.opencontainers.image.title="sherlock"
+LABEL org.opencontainers.image.description="Prometheus exporter for Redfish-enabled BMCs"
+LABEL org.opencontainers.image.source="https://github.com/mllnd/sherlock"
+LABEL org.opencontainers.image.authors="mllnd"
+LABEL org.opencontainers.image.licenses="MIT"
 
 WORKDIR /app
 
