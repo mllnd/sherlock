@@ -18,10 +18,16 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+// Build information, set via -ldflags
+var (
+	version = "dev"
+	commit  = "none"
+)
+
 var (
 	listenAddress = flag.String("web.listen-address", "localhost:9290", "Address to listen on for web interface and telemetry")
 	metricsPath   = flag.String("web.telemetry-path", "/metrics", "Path under which to expose metrics")
-	version       = flag.Bool("version", false, "Print version information and exit")
+	showVersion   = flag.Bool("version", false, "Print version information and exit")
 )
 
 // SherlockCollector is the main collector that wraps all other collectors
@@ -162,8 +168,8 @@ func (c *SherlockCollector) Close() {
 func main() {
 	flag.Parse()
 
-	if *version {
-		fmt.Println("Sherlock Redfish Exporter v0.1.0")
+	if *showVersion {
+		fmt.Printf("sherlock %s-%s\n", version, commit)
 		os.Exit(0)
 	}
 

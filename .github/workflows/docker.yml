@@ -58,3 +58,6 @@ jobs:
           tags: "${{ steps.meta.outputs.tags }}"
           cache-from: "type=gha"
           cache-to: "type=gha,mode=max"
+          build-args: |
+            VERSION=${GITHUB_REF#refs/tags/}
+            COMMIT=${{ github.sha }}

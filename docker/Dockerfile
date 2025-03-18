@@ -15,7 +15,14 @@ RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o sherlock ./cmd/sherlock
+ARG VERSION="v0.0.0"
+ARG COMMIT
+
+RUN COMMIT=$(git rev-parse --short HEAD || echo "unknown") && \
+    CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w \
+    -X main.version=${VERSION} \
+    -X main.commit=${COMMIT}" \
+    -o sherlock ./cmd/sherlock
 
 FROM alpine:latest
 
